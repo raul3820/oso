@@ -49,7 +49,7 @@ async def classify_msgs(db: DB) -> bool:
 async def generate_replies(db: DB) -> bool:
     """Generates a response to unreplied msgs and updates the database."""
 
-    any = [MsgClassification.inquiry, MsgClassification.boring, MsgClassification.spam]
+    any = [MsgClassification.inquiry, MsgClassification.boring, MsgClassification.spam, MsgClassification.other]
     ex = [MsgClassification.illegal, MsgClassification.banned, MsgClassification.instruction]
 
     if os.getenv('TEST_MODE') == 'True':
