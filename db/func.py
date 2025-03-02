@@ -71,7 +71,7 @@ def with_pipe_lock(msg_class: Type[AppMsg] = AppMsg) -> Callable[[Callable[P, Aw
 
 
 class DBFunctions:
-    def __init__(self, lock_timeout_seconds: int = 1):
+    def __init__(self, lock_timeout_seconds: int = 60):
         self.pool: Optional[Pool] = None
         self.lock_timeout_seconds = lock_timeout_seconds
 
@@ -326,7 +326,7 @@ class DBFunctions:
                 group by 1
             ),
             msgs as ( 
-                select msg_id, body 
+                select msg_id, source, receiver, body 
                 from oso.msg 
                 where 
                 extract(epoch from current_timestamp - interval '{lookback}') < created_at

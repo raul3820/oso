@@ -119,8 +119,13 @@ async def generate_summaries(db: DB) -> bool:
     for msg, summary in zip(locked_msgs, summaries):
         if not summary:
             continue
-        
-        image = pic.get_image_bytes(summary + f"\n\n ({msg.receiver})")
+        prefix = ""
+        if msg.source in [MsgSource.RedditChat, MsgSource.RedditComment, MsgSource.RedditMessage]:
+            prefix = 'u/'
+        elif msg.source in [MsgSource.TwitterComment, MsgSource.TwitterMessage]:
+            prefix = '@'
+
+        image = pic.get_image_bytes(summary + f"\n\n -- {prefix}{msg.receiver})")
         if not image:
             continue
 
