@@ -1,0 +1,25 @@
+volumes:
+  oso:
+
+networks:
+  oso:
+    driver: bridge
+
+services:
+  oso:
+    build:
+      context: .
+      dockerfile: dockerfile.oso
+    container_name: oso
+    networks:
+     - oso
+    ports:
+      - "11433:11433"
+    volumes:
+      - oso:/app/data
+    env_file:
+      - .env
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
