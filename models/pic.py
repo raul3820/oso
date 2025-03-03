@@ -48,10 +48,7 @@ def get_image_bytes(text_content, background_name="background.jpg", image_format
         else:
             # If no suitable font found, use a basic font
             font = ImageFont.load_default()
-            logfire.warning(
-                "Warning: Using default font. Special characters may not display correctly.", 
-                "Install fonts in your Docker container with: apt-get update && apt-get install -y fonts-dejavu"
-                )
+            logfire.warning("Using default font. Special characters may not display correctly.")
     except Exception as e:
         logfire.exception(f"Error loading font: {e}. Using default font.")
         font = ImageFont.load_default()
