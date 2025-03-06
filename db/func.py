@@ -27,7 +27,7 @@ def validate_query(query_string):
 def with_pipe_lock(msg_class: Type[AppMsg] = AppMsg) -> Callable[[Callable[P, Awaitable[None]]], Callable[P, Awaitable[List[AppMsg]]]]:
     """Decorator for atomically fetching and locking messages.
     
-    Decorated functions must define `query` as an inline SQL string
+    Decorated functions must return query as an inline SQL string
     to select candidate messages. This decorator performs an atomic fetch and lock
     and returns a list of locked AppMsg objects.
     """

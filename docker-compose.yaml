@@ -13,8 +13,6 @@ services:
     container_name: oso
     networks:
      - oso
-    ports:
-      - "11433:11433"
     volumes:
       - oso:/app/data
     env_file:
